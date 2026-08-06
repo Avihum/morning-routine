@@ -1,4 +1,4 @@
-import { act, fireEvent, render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { describe, expect, it, vi } from 'vitest';
 import App from './App';
@@ -47,28 +47,20 @@ describe('morning routine', () => {
   });
 
   it('persists disabled sound', async () => {
-    vi.useFakeTimers();
     render(<App />);
     const gear = screen.getByLabelText(/פתיחת הגדרות/);
-    fireEvent.pointerDown(gear, { pointerId: 1 });
-    act(() => vi.advanceTimersByTime(800));
-    fireEvent.pointerUp(gear, { pointerId: 1 });
+    fireEvent.click(gear);
     expect(screen.getByRole('dialog', { name: 'הגדרות להורים' })).toBeInTheDocument();
     fireEvent.click(screen.getByRole('checkbox', { name: 'צלילים' }));
     expect(screen.getByRole('checkbox', { name: 'צלילים' })).not.toBeChecked();
-    vi.useRealTimers();
   });
 
   it('parent reset clears all completed tasks', async () => {
-    vi.useFakeTimers();
     render(<App />);
     fireEvent.click(screen.getByRole('button', { name: 'להתלבש' }));
     const gear = screen.getByLabelText(/פתיחת הגדרות/);
-    fireEvent.pointerDown(gear, { pointerId: 1 });
-    act(() => vi.advanceTimersByTime(800));
-    fireEvent.pointerUp(gear, { pointerId: 1 });
+    fireEvent.click(gear);
     fireEvent.click(screen.getByRole('button', { name: 'איפוס כל המשימות' }));
     expect(screen.getByLabelText('0 מתוך 6 משימות הושלמו')).toBeInTheDocument();
-    vi.useRealTimers();
   });
 });

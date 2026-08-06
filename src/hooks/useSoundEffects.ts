@@ -24,7 +24,11 @@ export function useSoundEffects(enabled: boolean) {
   }, [enabled]);
 
   return {
-    playComplete: useCallback((variant: number) => playNotes([[523, 659], [587, 740], [659, 784]][variant % 3]), [playNotes]),
+    playComplete: useCallback((variant: number) => {
+      const roots = [440, 466, 494];
+      const root = roots[variant % roots.length];
+      playNotes([root, root * 1.122, root * 1.26, root * 1.335, root * 1.498, root * 1.682], 0.1);
+    }, [playNotes]),
     playCelebration: useCallback(() => playNotes([523, 659, 784, 1047], 0.18), [playNotes])
   };
 }

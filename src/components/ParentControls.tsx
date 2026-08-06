@@ -1,11 +1,9 @@
-import { useLongPress } from '../hooks/useLongPress';
 import type { Settings } from '../types';
 
 type Props = { open: boolean; settings: Settings; onOpen: () => void; onClose: () => void; onReset: () => void; onChange: (settings: Partial<Settings>) => void };
 
 export function ParentControls({ open, settings, onOpen, onClose, onReset, onChange }: Props) {
-  const openPress = useLongPress(onOpen);
-  if (!open) return <button className="parent-button" aria-label="פתיחת הגדרות הורים בלחיצה ארוכה" {...openPress}>⚙</button>;
+  if (!open) return <button className="parent-button" aria-label="פתיחת הגדרות הורים" onClick={onOpen}>⚙</button>;
   return <div className="modal-backdrop" role="presentation">
     <section className="parent-panel" role="dialog" aria-modal="true" aria-labelledby="parent-title">
       <div className="panel-title"><h2 id="parent-title">הגדרות להורים</h2><button onClick={onClose} aria-label="סגירה">×</button></div>
