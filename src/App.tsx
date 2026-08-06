@@ -22,7 +22,7 @@ export default function App() {
   const completeTask = (index: number) => {
     const task = tasks[index];
     if (!routine.complete(task.id)) return;
-    sounds.playComplete(index);
+    sounds.playComplete(routine.completed.length);
     if (routine.settings.speech && 'speechSynthesis' in window) {
       const utterance = new SpeechSynthesisUtterance(task.completedMessage);
       utterance.lang = 'he-IL';

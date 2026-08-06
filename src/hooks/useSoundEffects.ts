@@ -24,10 +24,9 @@ export function useSoundEffects(enabled: boolean) {
   }, [enabled]);
 
   return {
-    playComplete: useCallback((variant: number) => {
-      const roots = [440, 466, 494];
-      const root = roots[variant % roots.length];
-      playNotes([root, root * 1.122, root * 1.26, root * 1.335, root * 1.498, root * 1.682], 0.1);
+    playComplete: useCallback((step: number) => {
+      const ascendingNotes = [392, 440, 494, 523, 587, 659];
+      playNotes([ascendingNotes[Math.min(step, ascendingNotes.length - 1)]], 0.2);
     }, [playNotes]),
     playCelebration: useCallback(() => playNotes([523, 659, 784, 1047], 0.18), [playNotes])
   };
