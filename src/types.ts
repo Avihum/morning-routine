@@ -1,4 +1,4 @@
-export type TaskId = 'dress' | 'breakfast' | 'brush' | 'toilet' | 'shoes' | 'sunscreen';
+export type TaskId = 'dress' | 'toilet' | 'breakfast' | 'brush' | 'bag' | 'shoes';
 
 export type RoutineTask = {
   id: TaskId;

@@ -31,11 +31,12 @@ export default function App() {
   };
 
   return <main className="app-shell">
-    <div className="cloud cloud-one"/><div className="cloud cloud-two"/>
+    <div className="dawn-glow" aria-hidden="true"/><div className="cloud cloud-one"/><div className="cloud cloud-two"/>
     <ParentControls open={parentOpen} settings={routine.settings} onOpen={() => setParentOpen(true)} onClose={() => setParentOpen(false)} onChange={routine.updateSettings} onReset={() => { routine.reset(); setParentOpen(false); }} />
     <header className="morning-header">
+      <span className="eyebrow">המסע לבית הספר</span>
       <h1>בוקר טוב, {routine.settings.childName || 'חבר'}</h1>
-      <p>בוא נתארגן!</p>
+      <p>שש משימות קטנות — ויוצאים להרפתקה</p>
       <ProgressIndicator completed={routine.completedSet} />
     </header>
 
@@ -46,8 +47,9 @@ export default function App() {
     </section>
 
     <footer className="landscape">
-      <div className="hills"/><div className="sun" aria-hidden="true"><span className="sun-eye"/><span className="sun-eye"/><span className="sun-smile"/></div>
-      <div className="encouragement"><strong>{allComplete ? 'איזה יופי!' : 'כמעט מוכנים'}</strong><span>{allComplete ? 'סיימת את כל משימות הבוקר!' : 'אתה עושה עבודה נהדרת!'}</span></div>
+      <div className="mountains mountains-back"/><div className="mountains mountains-front"/>
+      <img className="morning-dragon" src={`${import.meta.env.BASE_URL}art/morning-dragon.png`} alt="" aria-hidden="true" />
+      <div className="encouragement"><strong>{allComplete ? 'המשימה הושלמה!' : 'ממשיכים קדימה'}</strong><span>{allComplete ? 'סיימת את כל משימות הבוקר!' : 'עוד קצת ואנחנו מוכנים לבית הספר'}</span></div>
     </footer>
     {allComplete && !parentOpen && <CelebrationOverlay destination={routine.settings.destination} onReset={routine.reset} />}
   </main>;

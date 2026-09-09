@@ -5,11 +5,13 @@ import App from './App';
 import { STORAGE_KEY, defaultSettings, loadState, localDate } from './hooks/useMorningRoutine';
 
 describe('morning routine', () => {
-  it('displays all six tasks in recommended RTL DOM order', () => {
+  it('displays all six tasks in the intended RTL sequence', () => {
     render(<App />);
     expect(screen.getAllByRole('button', { pressed: false })).toHaveLength(6);
     expect(screen.getByRole('button', { name: 'להתלבש' })).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: 'להתמרח' })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'לארגן תיק' })).toBeInTheDocument();
+    const taskButtons = screen.getByRole('region', { name: 'משימות הבוקר' }).querySelectorAll('.task-card');
+    expect(Array.from(taskButtons, (button) => button.textContent)).toEqual(['להתלבש', 'פיפי', 'לאכול', 'לצחצח', 'לארגן תיק', 'נעליים']);
   });
 
   it('completes a task and updates progress', async () => {
@@ -30,14 +32,14 @@ describe('morning routine', () => {
   it('allows out-of-order completion and advances the recommendation correctly', async () => {
     render(<App />);
     await userEvent.click(screen.getByRole('button', { name: 'נעליים' }));
-    expect(screen.getByText('עכשיו מתלבשים')).toBeInTheDocument();
+    expect(screen.getByText('המשימה הבאה: להתלבש')).toBeInTheDocument();
     await userEvent.click(screen.getByRole('button', { name: 'להתלבש' }));
-    expect(screen.getByText('עכשיו אוכלים')).toBeInTheDocument();
+    expect(screen.getByText('המשימה הבאה: פיפי')).toBeInTheDocument();
   });
 
   it('opens the celebration after every task is complete', async () => {
     render(<App />);
-    for (const label of ['להתלבש', 'לאכול', 'לצחצח', 'פיפי', 'נעליים', 'להתמרח']) await userEvent.click(screen.getByRole('button', { name: label }));
+    for (const label of ['להתלבש', 'פיפי', 'לאכול', 'לצחצח', 'לארגן תיק', 'נעליים']) await userEvent.click(screen.getByRole('button', { name: label }));
     expect(screen.getByRole('dialog', { name: 'כל הכבוד!' })).toBeInTheDocument();
   });
 
