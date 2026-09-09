@@ -177,9 +177,22 @@ button { touch-action: manipulation; }
   font-weight: 900;
 }
 .completed .check { border-color: var(--task-color); background: var(--task-color); }
-.task-art { display: block; width: 100%; max-width: 155px; margin: 24px auto 1px; }
-.task-art svg { display: block; width: 100%; height: auto; }
-.icon-blob { fill: var(--task-pale); opacity: .82; }
+.task-art {
+  display: block;
+  width: 100%;
+  max-width: 170px;
+  aspect-ratio: 1;
+  margin: 18px auto 1px;
+  overflow: hidden;
+  border: 1px solid #dfe5ed;
+  border-radius: 15px;
+  background: #eef2f6;
+  box-shadow: inset 0 1px #fff, 0 5px 12px #26375414;
+}
+.task-image { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform .3s ease; }
+.task-card:nth-child(3n + 1) .task-image { transform: translateX(3%) scale(1.1); }
+.task-card:nth-child(3n + 2) .task-image { transform: translateX(-3%) scale(1.1) scaleX(-1); }
+.task-card:nth-child(3n) .task-image { transform: scale(1.13); }
 .task-label { display: block; margin-top: 2px; color: #17243f; font-size: clamp(1.18rem, 2vw, 1.65rem); font-weight: 900; letter-spacing: -.025em; }
 .completed { animation: completeBounce .45s ease-out; }
 
@@ -245,7 +258,7 @@ button { touch-action: manipulation; }
   .app-shell { padding-bottom: 148px; }
   .task-grid { grid-template-columns: repeat(3, 1fr); max-width: 720px; }
   .task-card { min-height: 184px; }
-  .task-art { max-width: 118px; margin-top: 18px; }
+  .task-art { max-width: 128px; margin-top: 15px; }
   .landscape { height: 132px; }
   .morning-dragon { width: 102px; right: 16px; }
   .encouragement { min-width: 310px; }
@@ -264,7 +277,7 @@ button { touch-action: manipulation; }
   .next-hint { margin: 13px auto 11px; padding: 8px 18px; }
   .task-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
   .task-card { min-height: 165px; padding-bottom: 10px; border-radius: 17px; }
-  .task-art { max-width: 102px; margin-top: 17px; }
+  .task-art { max-width: 112px; margin-top: 14px; }
   .task-label { font-size: 1.16rem; }
   .check { top: 11px; right: 10px; width: 30px; height: 30px; border-radius: 9px; }
   .morning-dragon { width: 88px; right: 6px; }
@@ -281,7 +294,7 @@ button { touch-action: manipulation; }
   .progress-copy { display: none; }
   .next-hint { margin: 9px auto; padding-block: 6px; }
   .task-card { min-height: 174px; }
-  .task-art { max-width: 112px; margin-top: 14px; }
+  .task-art { max-width: 120px; margin-top: 11px; }
   .landscape { height: 104px; }
   .morning-dragon { width: 83px; }
   .encouragement { bottom: 15px; padding-block: 8px; }
